@@ -24,19 +24,20 @@ exports.handler = function (event, context) {
     if (err) {
       context.fail(err)
     } else {
-      var data = uglify.minify(new Buffer(data.Body).toString())
+      var minifiedData = uglify.minify(new Buffer(data.Body).toString())
 
-      // .orig. を .min. に置き換えるぞ
+      // .orig. を .min. に置き換える 
+      var outputKey = params.Key.replace(/\.orig\./, ".min.")
       s3.putObject({
           Bucket: params.Bucket,
-          Key: params.Key.replace(/\.orig\./, ".min."),
-          Body: data.code
+          Key: outputKey,
+          Body: minifiedData.code
         },
         function (err, data) {
           if (err) {
-            context.fail()
+            context.fail(err)
           } else {
-            context.done()
+            context.succeed(`${key} to ${outputKey}`)
           }
         })
     }
