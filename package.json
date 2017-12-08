@@ -1,0 +1,15 @@
+{
+  "name": "lambda_minify",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "ma2saka",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.166.0",
+    "uglify-js": "^3.2.1"
+  }
+}
